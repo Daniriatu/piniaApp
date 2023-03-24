@@ -1,28 +1,25 @@
-import type { Client } from '@/clients/interface/client';
-import { defineStore } from 'pinia';
-import { ref } from 'vue';
-export const useClientsStore = defineStore('clients', () => {
+import type { Client } from "@/clients/interface/client";
+import { defineStore } from "pinia";
+import { ref } from "vue";
+export const useClientsStore = defineStore("clients", () => {
+  const currentPage = ref<number>(1);
+  const totalPage = ref<number>(5);
+  const clients = ref<Client[]>([]);
 
-    const currentPage = ref<number>(1);
-    const totalPage = ref<number>(5);
-    const clients = ref<Client[]>([]);
+  return {
+    currentPage,
+    totalPage,
+    clients,
 
-    return {
+    setClients(newClient: Client[]) {
+      clients.value = newClient;
+    },
 
-        currentPage,
-        totalPage,
-        clients,
+    setPage(page: number) {
+      if (currentPage.value === page) return;
+      if (page <= 0) return;
 
-        setClients( newClient: Client[] ) {
-            clients.value = newClient;
-        },
-
-        setPage( page: number ) {
-            if ( currentPage.value === page ) return;
-            if ( page <= 0 ) return;
-            
-            currentPage.value = page;
-        }
-
-    }
+      currentPage.value = page;
+    },
+  };
 });
