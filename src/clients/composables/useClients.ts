@@ -3,7 +3,7 @@ import clientsApi from "@/api/clients-api";
 import { useQuery } from "@tanstack/vue-query";
 import { useClientsStore } from "../../store/clients";
 import { storeToRefs } from "pinia";
-import { watch, computed } from "vue";
+import { watch } from "vue";
 
 const getClients = async (page: number): Promise<Client[]> => {
   await new Promise((resolve) => {
@@ -38,9 +38,9 @@ const useClients = () => {
       store.setPage(page);
     },
 
-    totalPageNumbers: computed(() =>
-      [...new Array(totalPage.value)].map((v, i) => i + 1)
-    ),
+    // totalPageNumbers: computed(() =>
+    //   [...new Array(totalPage.value)].map((v, i) => i + 1)
+    // ),
   };
 
   // getPage: store.setPage
